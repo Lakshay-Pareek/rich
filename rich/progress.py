@@ -118,6 +118,7 @@ def track(
     update_period: float = 0.1,
     disable: bool = False,
     show_speed: bool = True,
+    expand: bool = False,
 ) -> Iterable[ProgressType]:
     """Track progress by iterating over a sequence.
 
@@ -139,7 +140,8 @@ def track(
         update_period (float, optional): Minimum time (in seconds) between calls to update(). Defaults to 0.1.
         disable (bool, optional): Disable display of progress.
         show_speed (bool, optional): Show speed if total isn't known. Defaults to True.
-    Returns:
+        expand (bool, optional): Expand progress bar to full width. Defaults to False.
+Returns:
         Iterable[ProgressType]: An iterable of the values in the sequence.
 
     """
@@ -154,6 +156,7 @@ def track(
                 complete_style=complete_style,
                 finished_style=finished_style,
                 pulse_style=pulse_style,
+                bar_width=None if expand else 40,
             ),
             TaskProgressColumn(show_speed=show_speed),
             TimeRemainingColumn(elapsed_when_finished=True),
